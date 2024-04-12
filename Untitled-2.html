@@ -1,0 +1,86 @@
+
+package console.application;
+
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int rollNumber;
+    private int age;
+
+    public Student() {
+    }
+
+    public Student(String name, int rollNumber, int age) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+class Test extends Student {
+    private int[] marks;
+    private static final int TOTAL_MARKS = 5;
+
+    public Test(String name, int rollNumber, int age) {
+        super(name, rollNumber, age);
+        marks = new int[TOTAL_MARKS];
+    }
+
+    public void inputMarks() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter " + TOTAL_MARKS + " marks of the student:");
+        
+        for (int i = 0; i < TOTAL_MARKS; i++) {
+            System.out.printf("Mark %d: ", (i + 1));
+            int mark = scanner.nextInt();
+            marks[i] = mark;
+        }
+    }
+
+    public void display() {
+        System.out.println("Name: " + getName());
+        System.out.println("Roll Number: " + getRollNumber());
+        System.out.println("Age: " + getAge());
+
+        int sum = 0;
+        for (int i = 0; i < TOTAL_MARKS; i++) {
+            System.out.printf("Mark %d: %d\n", (i + 1), marks[i]);
+            sum += marks[i];
+        }
+        
+        float average = (float) sum / TOTAL_MARKS;
+        System.out.printf("Total marks: %d\nAverage mark: %.2f\n", sum, average);
+    }
+}
+
+public class ConsoleApplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter name of the student: ");
+        String name = scanner.next();
+
+        System.out.print("Enter roll number of the student: ");
+        int rollNumber = scanner.nextInt();
+
+        System.out.print("Enter age of the student: ");
+        int age = scanner.nextInt();
+
+        Test testStudent = new Test(name, rollNumber, age);
+        testStudent.inputMarks();
+        testStudent.display();
+    }
+}
